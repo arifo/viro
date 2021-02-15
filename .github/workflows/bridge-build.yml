@@ -1,52 +1,44 @@
 name: Viro Bridge CI Pipeline
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   bridge_build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+          registry-url: "https://registry.npmjs.org"
 
       # Setup dependencies for React Native
       # Note, brew and node are already installed on github workflows.
-      - name: Setup Watchman 
-        run: brew install watchman 
-      - name: ViroReact Pods Install
-        run: pod install
+      - name: Setup Watchman
+        run: brew install watchman
+      - name: Install dependencies
+        run: yarn
+      - name: Install Pods
         working-directory: ./ios
-      - name: ViroReact Npm Install
-        run: npm install
-        working-directory: ./test  
-      - name: ViroExample Pods Install
-        working-directory: ./test/ios/ViroExample  
-        run: npm install
-        
-      - name: xcodebuild React IOS framework
-        working-directory: ./test/ios
-        run: |
-          xcodebuild \
-            -workspace ViroExample/ViroExample.xcworkspace/ \
-            -scheme React \
-            -sdk iphoneos \
-            -configuration Debug \
-            -UseModernBuildSystem=NO   
+        run: pod install
 
       - name: xcodebuild ViroReact IOS framework
-        working-directory: ./test/ios
+        working-directory: ./ios
         run: |
           xcodebuild \
-            -workspace ViroExample/ViroExample.xcworkspace/ \
+            -workspace ViroReact.xcworkspace/ \
             -scheme ViroReact \
             -sdk iphoneos \
-            -configuration Debug \
-            -UseModernBuildSystem=NO             
+            -configuration Release \
+            clean build
 
       # Prepare Release scripts should also run our gradle builds
       # required for Android RN Frameworks.
-      - name: Prepare Release
+      - name: Prepare Android Release
         run: ./prepare_release.sh
-  
-      - name: Upload tgz Artifact
-        uses: actions/upload-artifact@v1
-        with: 
-          name: react-viro-2.17.0.tgz
-          path: ./react-viro-2.17.0.tgz
+
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
