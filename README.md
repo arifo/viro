@@ -1,3 +1,5 @@
+VRTVideoSurfaceManager fixed
+
 # Viro React
 
 [Chat](https://discord.gg/YfxDBGTxvG)
@@ -24,42 +26,45 @@ To report bugs/issues with Viro platform, please file new issues on this reposit
 To rebuild the testbed app from source, please refere to the testbed repo [here](https://github.com/viromedia/viro-media-app/tree/master).
 
 ## Instructions for running sample code as a stand alone project (with no Testbed app):
+
 Tried the samples through our Testbed app and now want to try deploying sample code to your device as standalone apps? These quick steps below should get you started:
+
 1. Follow steps 1 - 4 from above (instructions for using with Testbed app)
 2. For Android, make sure you have downloaded and installed Android Studio from [here](https://developer.android.com/studio/install) to get required SDK and platform-tools for building android apps
-    Make sure you have the required environment variables set - `$ANDROID_HOME`, and added `platform-tools` to `$PATH` variable. If not,
-    ```
-    export ANDROID_HOME=/YOUR_PATH_TO/Android/sdk
-    export PATH=$ANDROID_HOME/platform-tools:$PATH
-    export PATH=$ANDROID_HOME/tools:$PATH
-    ```
-    Build and launch android app by executing the following from the root of the project
-    ```
-    react-native run-android --variant=gvrDebug
-    ```
+   Make sure you have the required environment variables set - `$ANDROID_HOME`, and added `platform-tools` to `$PATH` variable. If not,
+   ```
+   export ANDROID_HOME=/YOUR_PATH_TO/Android/sdk
+   export PATH=$ANDROID_HOME/platform-tools:$PATH
+   export PATH=$ANDROID_HOME/tools:$PATH
+   ```
+   Build and launch android app by executing the following from the root of the project
+   ```
+   react-native run-android --variant=gvrDebug
+   ```
 3. For iOS, in Xcode open `ViroSample.xcworkspace` in `ios/` directory.
-    Select the right "Team" for `ViroSample` and `ViroSampleTest` target under `General -> Signing`
-    Hit play to build and launch the app on your iOS device
+   Select the right "Team" for `ViroSample` and `ViroSampleTest` target under `General -> Signing`
+   Hit play to build and launch the app on your iOS device
 
 ### Changing Between Samples
 
 1. Open App.js in a text editor.
 2. For AR, set showARScene=true at line 44.
 3. For VR, Modify line 61: `scene: scenes['360 Photo Tour'],` to a scene defined in the `scenes` dictionary on line 30.
-3. Reload/restart the application.
+4. Reload/restart the application.
 
 ## Instructions for using a CI-built Viro React platform from Mainline:
+
 You can also try the latest mainline build containing bleeding edge features and fixes. Please keep in mind that mainline builds may not be as stable as release builds. To do so, simply:
 
 1. Go to the [Viro Actions Workflows](https://github.com/viromedia/viro/actions) for this project.
 2. You should see a list of "Viro Bridge CI Pipeline" workflows.
 3. Click on the latest successfully built workflow pipeline (should be a checkmark next to it).
 4. Download the latest built ViroReact.tgz artiface.
-4. Clone this repo into your workspace with git: `git clone https://github.com/viromedia/viro.git`.
-5. Go into the code-samples directory.
-6. Run `npm install` from the root of this project. 
-7. Remove the ViroReact framework that was pulled down from the npm install (you are going to use the pre-built one).
-8. npm install ../path/to/your/downloadedArtifact.tgz
+5. Clone this repo into your workspace with git: `git clone https://github.com/viromedia/viro.git`.
+6. Go into the code-samples directory.
+7. Run `npm install` from the root of this project.
+8. Remove the ViroReact framework that was pulled down from the npm install (you are going to use the pre-built one).
+9. npm install ../path/to/your/downloadedArtifact.tgz
 
 ## Instructions for manually building the Viro React platform:
 
@@ -84,22 +89,17 @@ You can also try the latest mainline build containing bleeding edge features and
    cd test/ios/ViroExample
    pod install
    ```
-8. Open `ViroExample.xcworkspace` in Xcode. (Make sure you open the .xcworkpace file, and **not*** the .xcodeproj file!)
+8. Open `ViroExample.xcworkspace` in Xcode. (Make sure you open the .xcworkpace file, and **not\*** the .xcodeproj file!)
 9. Select Product->Scheme. If you don't see a `React` scheme, hit `Manage Schemes...`. In the dialog box, add `React` scheme.
 10. Go through build configuration (Debug vs Release) for schemes `React`, `ViroReact` and `ViroExample` and ensure they are all either Release or Debug, depending on what you are trying to build.
 11. That's it! Now build React scheme for `Generic iOS Device`, followed by ViroReact scheme for the same target.
-Note:
-    ```
-    11.a If you want the ability to run on Simulator, 
-         change target to any of the `iOS Simulator` targets instead of `Generic iOS Device`. 
-    11.b If in your own app project setup, you prefer to include Viro React as a static library 
-         rather than relying on `use_frameworks!` - build scheme `ViroReact_static_lib` 
-         instead of `ViroReact` as mentioned above in step #11. 
-    ```
+    Note:
+    `` 11.a If you want the ability to run on Simulator, change target to any of the `iOS Simulator` targets instead of `Generic iOS Device`. 11.b If in your own app project setup, you prefer to include Viro React as a static library rather than relying on `use_frameworks!` - build scheme `ViroReact_static_lib` instead of `ViroReact` as mentioned above in step #11. ``
 12. You should see a new file `libViroReact.a` at `ios/dist/lib/libViroReact.a`.
 13. To run Viro React tests, run `ViroExample` scheme on your plugged in iOS device.
 
 ### Building Android Viro React:
+
 1. Under the viro directory, run `./prepareRelease.sh`.
 2. Your android bridge should now be built under release.
 3. You should see a new file created at android/react_viro/react_viro-release.aar
@@ -110,9 +110,9 @@ Note:
    ```
 5. Install app-gvr-release.apk from `test/android/app/build/output/gvr/app-gvr-release.apk` onto your plugged in Android device.
 
-
 ### Bundling and using built iOS and Android into a single npm tar package:
-1. The `./prepareRelease.sh` you ran above builds android react bridge and bundles both iOS and Android bridge into a `react-viro-*.tgz` file. * for current version from `package.json` file.
+
+1. The `./prepareRelease.sh` you ran above builds android react bridge and bundles both iOS and Android bridge into a `react-viro-*.tgz` file. \* for current version from `package.json` file.
 
 ## More information
 
@@ -125,6 +125,7 @@ Join our Slack group [here](https://join.slack.com/t/virodevelopers/shared_invit
 ## Sample Code
 
 ### [Figment AR (Complete Open Source App)](https://github.com/viromedia/figment-ar)
+
 A repository containing the entire source code, built using ViroReact and React Native, for Viro Media's award winning Figment AR App. Available on [Google Play](https://play.google.com/store/apps/details?id=com.viro.figment) and [App Store](https://itunes.apple.com/us/app/figment-ar/id1270018902?mt=8).
 
 <a href="https://github.com/viromedia/figment-ar"><img src="code-samples/screenshots/figment_1.png" width="200"/> <img src="code-samples/screenshots/figment_2.png" width="200"/> <img src="code-samples/screenshots/figment_3.png" width="200"/> <img src="code-samples/screenshots/figment_4.png" width="200"/></a>
@@ -201,6 +202,7 @@ An ARScene that lets the user place a car on a surface and drive it around the w
 An ARScene that searches for this vertical [marker](https://github.com/viromedia/viro/tree/master/code-samples/js/ARPosterDemo/res/blackpanther.jpg) and renders Black Panther jumping out of the marker.
 
 ### [AR Tracking Business Card Demo - iOS Only](https://github.com/viromedia/viro/tree/master/code-samples/js/ARBusinessCard)
+
 <a href="https://github.com/viromedia/viro/tree/master/code-samples/js/ARBusinessCard">
 <img src="https://github.com/vnovick/armonster-arkit2-businesscard/raw/master/business_card.gif">
 </a>
@@ -208,6 +210,7 @@ An ARScene that searches for this vertical [marker](https://github.com/viromedia
 An ARScene that tracks this [business card](https://github.com/viromedia/viro/blob/master/code-samples/js/ARBusinessCard/res/business_card.png) continously using image tracking.
 
 ### [AR Full Sample App](https://github.com/viromedia/ViroARSampleApp)
+
 A complete React Native w/Viro AR Sample App. Demonstrates how to place, drag, and scale objects in the real world while providing 2D UI feedback.
 
 <a href="https://github.com/viromedia/ViroARSampleApp">
@@ -233,4 +236,3 @@ A complete React Native w/Viro AR Sample App. Demonstrates how to place, drag, a
 <a href="https://blog.viromedia.com/add-snapchat-ar-lenses-to-any-app-w-react-native-viro-ar-9d4053769782">
 <img src="https://cdn-images-1.medium.com/max/1600/1*iTkW2kiLIwOwJ5e_HHxI6Q.gif" />
 </a>
-
