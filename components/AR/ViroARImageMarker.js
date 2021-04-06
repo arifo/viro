@@ -143,7 +143,7 @@ var ViroARImageMarker = createReactClass({
 
   render: function() {
 
-    // Uncomment this line to check for misnamed props
+    // Uncomment this line to check for misnamed props  
     //checkMisnamedProps("ViroARImageMarker", this.props);
 
     let timeToFuse = undefined;
