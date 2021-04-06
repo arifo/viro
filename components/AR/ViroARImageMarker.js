@@ -121,19 +121,19 @@ var ViroARImageMarker = createReactClass({
 
   _onAnchorFound: function(event: Event) {
     if (this.props.onAnchorFound) {
-      this.props.onAnchorFound(event.nativeEvent.anchorFoundMap);
+      this.props.onAnchorFound(event.nativeEvent.anchorFoundMap, this.props.target);
     }
   },
 
   _onAnchorUpdated: function(event: Event) {
     if (this.props.onAnchorUpdated) {
-      this.props.onAnchorUpdated(event.nativeEvent.anchorUpdatedMap);
+      this.props.onAnchorUpdated(event.nativeEvent.anchorUpdatedMap, this.props.target);
     }
   },
 
   _onAnchorRemoved: function(event: Event) {
     if (this.props.onAnchorRemoved) {
-      this.props.onAnchorRemoved();
+      this.props.onAnchorRemoved(this.props.target);
     }
   },
 
