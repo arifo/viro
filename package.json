@@ -1,9 +1,9 @@
 {
-  "name": "@pacprod/react-viro",
+  "name": "@viro-community/react-viro",
   "main": "index.js",
   "version": "2.20.0",
   "license": "MIT",
-  "repository": "git@github.com:PacProd/viro.git",
+  "repository": "git@github.com:arifo/viro.git",
   "description": "Fork of Viro complaint with new Apple conditions. Removes UIWebView",
   "scripts": {
     "start": "echo 'I dont think you meant to run npm start here.'",
